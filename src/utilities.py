@@ -27,7 +27,6 @@ def calculate_fugacity_with_coolprop(method, fluid, T, P):
     fugacity = HEOS.fugacity(0)# * J_to_au  # Convert to atomic units
     return fugacity
 
-
 def _random_rotation(pos, circlefrac = 1.0):
     # Translate to origin
     com = np.average(pos, axis=0)
@@ -65,6 +64,7 @@ def random_position(pos, rvecs):
     pos = _random_translation(pos, rvecs)
     return pos
 
+# version 1
 def vdw_overlap(atoms, vdw, n_frame, n_ads, select_ads):
     nat = len(atoms)
     pos, numbers = atoms.get_positions(), atoms.get_atomic_numbers()
@@ -75,6 +75,17 @@ def vdw_overlap(atoms, vdw, n_frame, n_ads, select_ads):
                 continue
             if d < vdw[numbers[i_ads]] + vdw[numbers[i]]:
                 return True
+    return False
+
+# version 2
+def vdw_collision(atoms, vdw):
+    nums = atoms.get_atomic_numbers()
+    l = len(atoms)
+    for i in range(3):
+        dists = atoms.get_distances(l-1-i, np.arange(l-3), mic=True)
+        coll = np.array([d < vdw[nums[l-1-i]] + vdw[nums[j]] - 0.7 for j, d in enumerate(dists)])
+        if True in coll:
+            return True
     return False
 
 
