@@ -161,6 +161,6 @@ for results_dir in results_dir_list:
     #  rho_bulk_gas = calcRhoIdealGas(pressure, temperature)
     #  rho_bulk_gas = calcRho(pressure, temperature)
     rho_bulk_gas = calcRhoWithCoolProp(pressure, temperature)
-    abs_uptake, excess_uptake = getUptake(npy_path, plot=True)
+    abs_uptake, excess_uptake = getUptake(npy_path, plot=False)
     print(f"{results_dir},{pressure},{abs_uptake},{excess_uptake}", file=fl)
 
