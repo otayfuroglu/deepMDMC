@@ -313,6 +313,7 @@ class DeepMDMC():
             self.lmp.command(f"reset_timestep 0")
 
 
+        self.lmp.command(f"fix 1 all recenter INIT INIT NULL")
         self.lmp.command(f"dump 1 all atom {self.interval} {self.results_dir}/md_{self.T}K_{self.P/bar}bar.lammpstrj")
         self.lmp.command(f"dump_modify 1 append yes")
 
@@ -644,6 +645,7 @@ class DeepMDMC():
 
         self._ase_to_lammpstrj(atoms_frame, atoms_ads, f"{self.results_dir}/last_frame.lammpstrj", timestep=0, units=self.units_lmp)
 
+        self.lmp.command(f"unfix 1 all recenter")
         self.lmp.command(f"undump 1")
         # Due to velecity units covert issue from ase to lammps and do not need update it we ingnore reading velecities
         # and recreate velecities with next line
@@ -669,6 +671,7 @@ class DeepMDMC():
             self.lmp.command(f"unfix mynpt")
             self.set_rigid_ads_lapmms(unfix_flag)
 
+        self.lmp.command(f"fix 1 all recenter INIT INIT NULL")
         self.lmp.command(f"dump 1 all atom {self.interval} {self.results_dir}/md_{self.T}K_{self.P/bar}bar.lammpstrj")
         self.lmp.command(f"dump_modify 1 append yes")
         self.lmp.command(f"run {nmdsteps}")
