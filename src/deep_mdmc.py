@@ -36,10 +36,10 @@ class DeepMDMC():
         self.results_dir = results_dir
         self.interval = interval
         self.atoms = atoms_frame
-        self.n_frame = len(atoms_frame) - 3 * Z_ads
         self.atoms_ads = atoms_ads
         self.flex_ads = flex_ads
         self.n_ads = len(self.atoms_ads)
+        self.n_frame = len(atoms_frame) - self.n_ads * Z_ads
         self.cell = np.array(atoms_frame.get_cell())
         self.V = np.linalg.det(self.cell) * angstrom**3
         self.T = T
@@ -49,7 +49,7 @@ class DeepMDMC():
         self.beta = 1 / (boltzmann * T)
         self.Z_ads = Z_ads
 
-        self.vdw = vdw_radii - 0.35
+        self.vdw = vdw_radii - 0.2
         self.lmp = None
 
     def _get_ads_atoms(self, atoms):

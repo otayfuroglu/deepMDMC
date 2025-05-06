@@ -93,13 +93,14 @@ device = 'cuda'
 
 
 vdw_radii = vdw_radii.copy()
-vdw_radii[1] = 1.0
-vdw_radii[6] = 1.0
-vdw_radii[8] = 1.25
+#  vdw_radii[1] = 1.0
+#  vdw_radii[6] = 1.0
+#  vdw_radii[8] = 1.25
 vdw_radii[12] = 1.25
 
 #  fugacity = calculate_fugacity_with_coolprop("HEOS", "CO2", temperature, pressure)
-eos = PREOS.from_name('carbondioxide')
+#  eos = PREOS.from_name('carbondioxide')
+eos = PREOS.from_name('methane')
 fugacity = eos.calculate_fugacity(temperature, pressure)
 
 flex_ads_keyword = ""
