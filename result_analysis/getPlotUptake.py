@@ -55,7 +55,7 @@ def getUptake(file_path, plot=False):
         fl_base = results_dir
         nAds_list = np.load(file_path).tolist()
 
-    abs_avg_nAds = np.array(nAds_list[int(len(nAds_list)/2):]).mean()
+    abs_avg_nAds = np.array(nAds_list[int(len(nAds_list)/4):]).mean()
     #  abs_avg_nAds = np.array(nAds_list[int(len(nAds_list)/1.25):]).mean()
 
     if plot:
