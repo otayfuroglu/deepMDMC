@@ -88,7 +88,7 @@ python $SCRIPT_DIR/runDeepMDMC.py \
     -molecule_path $molecule_path
 ```
 
-### 🔹 Flexible GCMC Simulation (Hybrid MD/GCMC)
+### Flexible GCMC Simulation (Hybrid MD/GCMC)
 
 To run a flexible framework simulation using hybrid MD/GCMC, set `sim_type` to `gcmcmd`. In this mode, molecular dynamics (MD) and grand canonical Monte Carlo (GCMC) are alternated throughout the simulation.
 
@@ -122,7 +122,7 @@ python $SCRIPT_DIR/runDeepMDMC.py \
     -nmdsteps $nmdsteps \
     -nmcswap $nmcswap \
     -nmcmoves $nmcmoves \
-    -flex_ads yes \
+    -flex_ads no \
     -opt yes \
     -interval 50 \
     -model_gcmc_path $model_gcmc_path \
