@@ -10,7 +10,7 @@ The overall workflow of the simulation algorithm is illustrated in the following
 
 <br/><br/>
 <p align="center">
-  <img src="workflow_ads.png" alt="Hybrid MD/GCMC Workflow" width="800"/>
+  <img src="workflow_ads_2.png" alt="Hybrid MD/GCMC Workflow" width="800"/>
 </p>
 <br/><br/>
 ## Installation
