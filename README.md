@@ -4,8 +4,6 @@ This repository contains code for performing adsorption simulations in metal-org
 
 The code is actively under development. We warmly welcome contributions from the community — whether it's fixing issues, improving documentation, or extending functionality.
 
-## MD/GCMC 
-
 The overall workflow of the simulation algorithm is illustrated in the following scheme, (a) summarizing the key steps of the MLP-based GCMC and hybrid MD/GCMC approach, (b) isotermal and (c) isobaric adsoption results.
 
 <br/>
