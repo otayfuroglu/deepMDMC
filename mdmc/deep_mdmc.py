@@ -680,34 +680,3 @@ class DeepMDMC():
         self.lmp.command(f"write_data {self.results_dir}/data.last_frame")
         self.atoms = read_lammps_data(f"{self.results_dir}/data.last_frame", units=self.units_lmp)
 
-        #  write("test.extxyz", self.atoms)
-        #  self.atoms = self._lammps2ase_atoms()
-        # GCMC
-        #  print("GMCM steps...")
-        #  self.run_gcmc(nmcswap, nmcmoves)
-        #  #  self._atoms2lammpsdata(self.atoms)
-        #  atoms_frame = self.atoms[:self.n_frame]
-        #  atoms_ads = self.atoms[self.n_frame:]
-        #
-        #  self._ase_to_lammpstrj(atoms_frame, atoms_ads, f"{self.results_dir}/last_frame.lammpstrj", timestep=0, units=self.units_lmp)
-        #
-        #  self.lmp.command(f"undump 1")
-        #  self.lmp.command(f"read_dump {self.results_dir}/last_frame.lammpstrj 0 x y z vx vy vz replace no purge yes add yes timestep no")
-        #
-        #  # Set the ids to obtain the rigid body of each molecule individually
-        #  mol_id = 0
-        #  atom_id = 1
-        #  for i in range(len(atoms_frame)):
-        #      self. lmp.command(f"set atom {atom_id} mol {mol_id}")
-        #      atom_id += 1
-        #  mol_id +=1
-        #  for i in range(len(atoms_ads)):
-        #      self. lmp.command(f"set atom {atom_id} mol {mol_id}")
-        #      if i != 0 and (i+1) % self.n_ads == 0:
-        #          mol_id +=1
-        #      atom_id += 1
-        #
-        #  self.lmp.command(f"dump 1 all atom {self.interval} {self.results_dir}/md_{self.T}K_{self.P/bar}bar.lammpstrj")
-        #  self.lmp.command(f"dump_modify 1 append yes")
-        #  self.lmp.command(f"rerun last_frame.lammpstrj dump x y z vx vy vz")
-
