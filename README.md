@@ -24,9 +24,6 @@ You can install them using pip:
 
 ```bash
 pip install numpy torch ase molmod CoolProp
-
-### 📦 Get the Code
-
 ```
 
 Clone this repository using:
@@ -37,3 +34,7 @@ cd your-repo-name
 
 
 ## How To Use
+
+## Cite us
+Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin.
+https://doi.org/10.26434/chemrxiv-2025-c85xt
