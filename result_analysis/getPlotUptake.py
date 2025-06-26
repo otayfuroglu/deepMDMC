@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 import os
+import argparse
 
 
 
@@ -11,7 +12,18 @@ BAR2PASCAL = 1e5
 N_A = 6.022e+23  # molecules per mole
 
 
-def calcRhoCoolProp(pressure, temperature, M_fluid, fluid="CO2"):
+def getBoolStr(string):
+    string = string.lower()
+    if "true" in string or "yes" in string:
+        return True
+    elif "false" in string or "no" in string:
+        return False
+    else:
+        print("%s is bad input!!! Must be Yes/No or True/False" %string)
+        sys.exit(1)
+
+
+def calcRhoCoolProp(pressure, temperature, M_fluid, fluid):
     import CoolProp.CoolProp as CP
     # in mol/m^3
     return CP.PropsSI("D", "T", temperature, "P", pressure, fluid) / M_fluid
@@ -41,7 +53,7 @@ def getUptake(file_path, plot=False):
         fl_base = file_path.split("/")[-1].replace(".extxyz", "")
         atoms_list = read(extxyz_path, index=":")
         n_atoms_frame = len(atoms_frame)
-        nAds_list = [(len(atoms)-n_atoms_frame)/3 for atoms in atoms_list]
+        nAds_list = [(len(atoms)-n_atoms_frame)/n_ads for atoms in atoms_list]
 
     elif file_path.endswith(".csv"):
         # from status file
@@ -72,15 +84,33 @@ def getUptake(file_path, plot=False):
     return abs_uptake, excess_uptake
 
 
+parser = argparse.ArgumentParser(description="Give something ...")
+parser.add_argument("-results_dir", type=str, required=True, help="")
+parser.add_argument("-gas_type", type=str, required=True, help="")
+parser.add_argument("-plot", type=str, required=True, help="")
+args = parser.parse_args()
 
 
-results_dir_list = [it for it in os.listdir("./") if os.path.isdir(it) and "results" in it]
+
+results_dir_list = [it for it in os.listdir(args.results_dir) if os.path.isdir(it) and "results" in it]
 atoms_frame = read("./frame0.extxyz")
 
+gas_type = args.gas_type
 
 #  void_volume = (he_void_frac * atoms_frame.get_volume()) / 1e30 # in m^3
+if gas_type.lower() == "co2":
+    M_gas = 0.04401  # kg/mol for CO2
+    n_ads = 3
+elif gas_type.lower() == "ch4":
+    M_gas = 0.01604  # kg/mol for CH4
+    n_ads = 5
+else:
+    import sys
+    print(f"Error: {gas_type} gas type is not valid\n")
+    sys.exit(1)
 
-M_CO2 = 0.04401  # kg/mol for CO2
+print("gas type", gas_type)
+
 void_fraction = 0.826  # Helium void fraction from CoRE MOF database
 frame_volume_tot =  atoms_frame.get_volume() # in Ang^3
 frame_mass_tot = sum(atoms_frame.get_masses())
@@ -98,7 +128,7 @@ for results_dir in results_dir_list:
     #  csv_path = f"{results_dir}/status.csv"
     npy_path = f"{results_dir}/uptake_{pressure}bar.npy"
     pressure *= BAR2PASCAL # in pascal
-    rho_bulk_co2 = calcRhoCoolProp(pressure, temperature, M_CO2, fluid="CO2")
-    abs_uptake, excess_uptake = getUptake(npy_path, plot=False)
+    rho_bulk_co2 = calcRhoCoolProp(pressure, temperature, M_gas, fluid=gas_type.upper())
+    abs_uptake, excess_uptake = getUptake(npy_path, plot=getBoolStr(args.plot))
     print(f"{results_dir},{pressure},{temperature},{abs_uptake},{excess_uptake}", file=fl)
 
