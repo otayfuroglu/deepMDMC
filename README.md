@@ -19,8 +19,8 @@ The overall workflow of the simulation algorithm is illustrated in the following
 
 Before running the simulation code, ensure the following Python packages are installed:
 
-- `numpy`
-- `torch`
+- `nequip`
+- `pair_nequip`
 - `ase`
 - `molmod`
 - `CoolProp`
