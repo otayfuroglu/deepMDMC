@@ -33,7 +33,9 @@ pip install numpy torch ase molmod CoolProp
 ### 📦 Get the Code
 
 Clone this repository using:
+```
 
 ```bash
 git clone https://github.com/yourusername/your-repo-name.git
 cd your-repo-name
+```
