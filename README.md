@@ -4,15 +4,20 @@ This repository contains code for performing adsorption simulations in metal-org
 
 The code is actively under development. We warmly welcome contributions from the community — whether it's fixing issues, improving documentation, or extending functionality.
 
-## MD/GCMC Workflow
+## MD/GCMC 
 
-The overall workflow of the simulation algorithm is illustrated in the following scheme, summarizing the key steps of the MLP-based GCMC and hybrid MD/GCMC approach.
+(a)The overall workflow of the simulation algorithm is illustrated in the following scheme, summarizing the key steps of the MLP-based GCMC and hybrid MD/GCMC approach, (b) isotermal and (c) isobaric adsoption results.
 
 <br/><br/>
 <p align="center">
   <img src="workflow_ads_2.png" alt="Hybrid MD/GCMC Workflow" width="900"/>
 </p>
 <br/><br/>
+
+### Releted paper
+Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin.
+https://doi.org/10.26434/chemrxiv-2025-c85xt
+
 ## Installation
 
 Before running the simulation code, ensure the following Python packages are installed:
