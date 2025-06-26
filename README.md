@@ -13,7 +13,7 @@ The overall workflow of the simulation algorithm is illustrated in the following
   <img src="workflow_ads.png" alt="Hybrid MD/GCMC Workflow" width="750"/>
 </p>
 
-## Installaitoin
+## Installation
 
 Before running the simulation code, ensure the following Python packages are installed:
 
