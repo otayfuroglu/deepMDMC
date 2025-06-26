@@ -47,7 +47,46 @@ git clone https://github.com/otayfuroglu/deepMDMC.git
 ```
 
 
-## How To Use
+
+## How to Use
+
+### Rigid GCMC Simulation
+
+To run a **rigid GCMC adsorption simulation**, set `sim_type` to `rigid` and `nmdsteps` to `0`. You can choose large values (e.g., 250,000) for `nmcswap` and `nmcmoves` to ensure sufficient Monte Carlo sampling. Geometry optimization (`-opt`) is optional and typically set to `no` for rigid frameworks.
+
+Below is an example script for running a rigid GCMC simulation:
+
+```bash
+SCRIPT_DIR=/path/to/mdmc
+model_md_path=/path/to/nequip_model/
+model_gcmc_path=/path/to/nequip_model/
+struc_path=/path/to/mof_structure
+molecule_path=/path/to/guest_molecule
+T=298
+P=1.0
+
+nmdsteps=0
+nmcswap=250000
+nmcmoves=250000
+timestep=0.0005 # ps
+
+python $SCRIPT_DIR/runDeepMDMC.py \
+    -sim_type rigid \
+    -pressure $P \
+    -temperature $T \
+    -timestep $timestep \
+    -totalsteps 1000000 \
+    -nmdsteps $nmdsteps \
+    -nmcswap $nmcswap \
+    -nmcmoves $nmcmoves \
+    -flex_ads no \
+    -opt no \
+    -interval 50 \
+    -model_gcmc_path $model_gcmc_path \
+    -model_md_path $model_md_path \
+    -struc_path $struc_path \
+    -molecule_path $molecule_path
+
 
 ## Cite us
 Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin.
