@@ -1,6 +1,6 @@
-#Flexible Freme Adsorption Simulation with hybride MD/GCMC
+# Flexible Freme Adsorption Simulation with hybride MD/GCMC
 
-##Overview
+## Overview
 
 This repository contains code for performing adsorption simulations in metal-organic frameworks (MOFs) using both MLP-based rigid GCMC and hybrid MD/GCMC simulations that incorporate framework flexibility. The simulations leverage a machine-learned potential (MLP), specifically a neural network potential (NNP), trained on DFT-level data for accurate representation of complex guest–MOF interactions, including those at open metal sites (OMS).
 
