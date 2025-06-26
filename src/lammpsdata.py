@@ -383,7 +383,7 @@ def write_lammps_data(
     fd,
     atoms: Atoms,
     *,
-    specorder: dict = None,
+    specorder: list = None,
     reduce_cell: bool = False,
     force_skew: bool = False,
     prismobj: Prism = None,
@@ -402,7 +402,7 @@ def write_lammps_data(
         File to which the output will be written.
     atoms : Atoms
         Atoms to be written.
-        specorder : dict{str:int}, optional
+        specorder : list[str], optional
         Chemical symbols in the order of LAMMPS atom types, by default None
     force_skew : bool, optional
         Force to write the cell as a
@@ -456,9 +456,9 @@ def write_lammps_data(
     #      # To index elements in the LAMMPS data file
     #      # (indices must correspond to order in the potential file)
 
-    species = specorder.keys()
-
-    n_atom_types = len(species)
+    #  species = specorder.keys()
+    #  n_atom_types = len(species)
+    n_atom_types = len(specorder)
     fd.write(f'{n_atom_types} atom types\n\n')
 
     bonds_in = []
@@ -496,7 +496,7 @@ def write_lammps_data(
     fd.write('\n')
 
     if masses:
-        _write_masses(fd, atoms, species, units)
+        _write_masses(fd, atoms, specorder, units)
 
     # Write (unwrapped) atomic positions.  If wrapping of atoms back into the
     # cell along periodic directions is desired, this should be done manually
@@ -518,8 +518,8 @@ def write_lammps_data(
         # Convert position from ASE units to LAMMPS units
         pos = convert(pos, 'distance', 'ASE', units)
         for i, r in enumerate(pos):
-            #  s = species.index(symbols[i]) + 1
-            s = specorder[symbols[i]][0] # NOTE edited
+            s = specorder.index(symbols[i]) + 1
+            #  s = specorder[symbols[i]][0] # NOTE edited
             line = (
                 f'{i + 1:>6} {s:>3}'
                 f' {r[0]:23.17g} {r[1]:23.17g} {r[2]:23.17g}'
@@ -535,8 +535,8 @@ def write_lammps_data(
         pos = convert(pos, 'distance', 'ASE', units)
         charges = convert(charges, 'charge', 'ASE', units)
         for i, (q, r) in enumerate(zip(charges, pos)):
-            #  s = species.index(symbols[i]) + 1
-            s = specorder[symbols[i]][0] # NOTE edited
+            s = specorder.index(symbols[i]) + 1
+            #  s = specorder[symbols[i]][0] # NOTE edited
             line = (
                 f'{i + 1:>6} {s:>3} {q:>5}'
                 f' {r[0]:23.17g} {r[1]:23.17g} {r[2]:23.17g}'
@@ -583,8 +583,8 @@ def write_lammps_data(
         pos = convert(pos, 'distance', 'ASE', units)
         charges = convert(charges, 'charge', 'ASE', units)
         for i, (m, q, r) in enumerate(zip(molecules, charges, pos)):
-            #  s = species.index(symbols[i]) + 1
-            s = specorder[symbols[i]][0] # NOTE edited
+            s = specorder.index(symbols[i]) + 1
+            #  s = specorder[symbols[i]][0] # NOTE edited
             line = (
                 f'{i + 1:>6} {m:>3} {s:>3} {q:>5}'
                 f' {r[0]:23.17g} {r[1]:23.17g} {r[2]:23.17g}'
@@ -615,10 +615,10 @@ def write_lammps_data(
     fd.flush()
 
 
-def _write_masses(fd, atoms: Atoms, species: list, units: str):
+def _write_masses(fd, atoms: Atoms, specorder: list, units: str):
     symbols_indices = atoms.symbols.indices()
     fd.write('Masses\n\n')
-    for i, s in enumerate(species):
+    for i, s in enumerate(specorder):
         if s in symbols_indices:
             # Find the first atom of the element `s` and extract its mass
             # Cover by `float` to make a new object for safety

@@ -67,11 +67,25 @@ def random_position(pos, rvecs):
 # version 1
 def vdw_overlap(atoms, vdw, n_frame, n_ads, select_ads):
     nat = len(atoms)
+    #  print(1, slice(n_frame + n_ads*select_ads, n_frame + n_ads*(select_ads+1)))
     pos, numbers = atoms.get_positions(), atoms.get_atomic_numbers()
     for i_ads in range(n_frame + n_ads*select_ads, n_frame + n_ads*(select_ads+1)):
         dists = atoms.get_distances(i_ads, np.arange(nat), mic=True)
         for i, d in enumerate(dists):
             if i >= n_frame + n_ads*select_ads and i < n_frame + n_ads*(select_ads+1):
+                continue
+            if d < vdw[numbers[i_ads]] + vdw[numbers[i]]:
+                return True
+    return False
+
+def vdw_overlap_modified(atoms, vdw, n_frame, n_ads, n_all_ads):
+    nat = len(atoms)
+    #  print(2, slice(n_frame + n_all_ads, n_frame + n_all_ads + n_ads))
+    pos, numbers = atoms.get_positions(), atoms.get_atomic_numbers()
+    for i_ads in range(n_frame + n_all_ads, n_frame + n_all_ads + n_ads):
+        dists = atoms.get_distances(i_ads, np.arange(nat), mic=True)
+        for i, d in enumerate(dists):
+            if i >= n_frame + n_all_ads and i < n_frame + n_all_ads + n_ads:
                 continue
             if d < vdw[numbers[i_ads]] + vdw[numbers[i]]:
                 return True
@@ -87,6 +101,18 @@ def vdw_collision(atoms, vdw):
         if True in coll:
             return True
     return False
+
+# version 3
+def vdw_collision_modified(atoms, vdw, n_ads):
+    numbers = atoms.get_atomic_numbers()
+    nat= len(atoms)
+    for i in range(n_ads):
+        dists = atoms.get_distances(nat-1-i, np.arange(nat-n_ads), mic=True)
+        for j, d in enumerate(dists):
+            if d < vdw[numbers[nat-1-i]] + vdw[numbers[j]] - 0.7:
+                return True
+    return False
+
 
 
 class EOS(object):
