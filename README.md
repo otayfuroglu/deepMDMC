@@ -9,7 +9,7 @@ The code is actively under development. We warmly welcome contributions from the
 The overall workflow of the simulation algorithm is illustrated in the following scheme, summarizing the key steps of the MLP-based GCMC and hybrid MD/GCMC approach.
 
 
-<p float="left">
+<p float="center">
   <img src="md_gmcm_workflow.png" alt="Hybrid MD/GCMC Workflow" width="350"/>
 </p>
 
