@@ -86,7 +86,50 @@ python $SCRIPT_DIR/runDeepMDMC.py \
     -model_md_path $model_md_path \
     -struc_path $struc_path \
     -molecule_path $molecule_path
+```
 
+### 🔹 Flexible GCMC Simulation (Hybrid MD/GCMC)
+
+To run a flexible framework simulation using hybrid MD/GCMC, set `sim_type` to `gcmcmd`. In this mode, molecular dynamics (MD) and grand canonical Monte Carlo (GCMC) are alternated throughout the simulation.
+
+Recommended settings:
+- `nmdsteps=1000` → Number of MD steps between each GCMC stage
+- `nmcswap=400`, `nmcmoves=400` → Number of Monte Carlo swap and move attempts per GCMC stage  
+- `totalsteps=1000000` → Total number of hybrid MD+GCMC steps (combined)
+
+Below is an example configuration:
+
+```bash
+SCRIPT_DIR=/path/to/mdmc
+model_md_path=/path/to/nequip_model/
+model_gcmc_path=/path/to/nequip_model/
+struc_path=/path/to/mof_structure
+molecule_path=/path/to/guest_molecule
+T=298
+P=1.0
+
+nmdsteps=1000
+nmcswap=400
+nmcmoves=400
+timestep=0.0005 # ps
+
+python $SCRIPT_DIR/runDeepMDMC.py \
+    -sim_type gcmcmd \
+    -pressure $P \
+    -temperature $T \
+    -timestep $timestep \
+    -totalsteps 1000000 \
+    -nmdsteps $nmdsteps \
+    -nmcswap $nmcswap \
+    -nmcmoves $nmcmoves \
+    -flex_ads yes \
+    -opt yes \
+    -interval 50 \
+    -model_gcmc_path $model_gcmc_path \
+    -model_md_path $model_md_path \
+    -struc_path $struc_path \
+    -molecule_path $molecule_path
+```
 
 ## Cite us
 Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin.
