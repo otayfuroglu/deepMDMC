@@ -10,7 +10,6 @@ The overall workflow of the simulation algorithm is illustrated in the following
 <p align="center">
   <img src="workflow_ads_2.png" alt="Hybrid MD/GCMC Workflow" width="900"/>
 </p>
-<br/>
 
 ### Releted paper
 Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin.
