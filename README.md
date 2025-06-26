@@ -6,7 +6,7 @@ The code is actively under development. We warmly welcome contributions from the
 
 ## MD/GCMC 
 
-(a)The overall workflow of the simulation algorithm is illustrated in the following scheme, summarizing the key steps of the MLP-based GCMC and hybrid MD/GCMC approach, (b) isotermal and (c) isobaric adsoption results.
+The overall workflow of the simulation algorithm is illustrated in the following scheme, (a) summarizing the key steps of the MLP-based GCMC and hybrid MD/GCMC approach, (b) isotermal and (c) isobaric adsoption results.
 
 <br/>
 <p align="center">
