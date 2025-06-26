@@ -30,3 +30,4 @@ python $SCRIPT_DIR/runDeepMDMC.py\
        	-model_md_path $model_md_path\
        	-struc_path $struc_path\
        	-molecule_path $molecule_path 
+
