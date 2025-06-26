@@ -1,4 +1,4 @@
-# Flexible Framework Adsorption Simulation with Hybrid MD/GCMC
+# MLP Besed Flexible Framework Adsorption Simulation with Hybrid MD/GCMC
 
 This repository contains code for performing adsorption simulations in metal-organic frameworks (MOFs) using both MLP-based rigid GCMC and hybrid MD/GCMC simulations that incorporate framework flexibility. The simulations leverage a machine-learned potential (MLP), specifically a equivariant interatomic potentials (NeqIP)
 
