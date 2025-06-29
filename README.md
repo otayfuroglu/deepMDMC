@@ -12,7 +12,7 @@ The overall workflow of the simulation algorithm is illustrated in the following
 </p>
 
 ### Releted paper
-Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin.
+Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu and Seda Keskin.
 https://doi.org/10.26434/chemrxiv-2025-c85xt
 
 ## Requirements
