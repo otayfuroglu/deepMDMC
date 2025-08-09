@@ -129,5 +129,5 @@ python $SCRIPT_DIR/runDeepMDMC.py \
 ```
 
 ## Cite us
-Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin, J. Chem. Phys. 163, 054704 (2025)
+Modeling CO2 Adsorption in Flexible MOFs with Open Metal Sites via Fragment-Based Neural Network Potentials, Omer Tayfuroglu andSeda Keskin, J. Chem. Phys. 163, 054704 (2025).
 [Link](https://pubs.aip.org/aip/jcp/article/163/5/054704/3357210/Modeling-CO2-adsorption-in-flexible-MOFs-with-open)
